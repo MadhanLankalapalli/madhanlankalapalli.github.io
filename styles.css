@@ -965,13 +965,12 @@ footer {
     .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .about-img-wrap { display: none; }
+  .about-img-wrap { width: 70%; }
   .skills-layout { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; gap: 0.8rem; }
   .edu-card { grid-template-columns: 1fr; gap: 1.5rem; }
   .edu-logo { width: 60px; height: 60px; }
   .float-chip { display: none; }
-
 }
 
 @media (max-width: 680px) {
@@ -991,6 +990,8 @@ footer {
   h1.hero-name { font-size: clamp(2.6rem, 10vw, 3.5rem); }
     .cert-grid { grid-template-columns: 1fr; }
     .pd-img-main{height: 340px;}
+  .about-img-wrap { width: 100%; }
+  .social-box{padding: 0 1rem}
 
 }
 
@@ -999,9 +1000,6 @@ footer {
   .hero-btns { flex-direction: column; }
   .btn-primary, .btn-outline { text-align: center; }
   .workshop-grid { grid-template-columns: 1fr; }
-  .about-img-wrap{display: block;}
-  .social-box{padding: 0 1rem}
-
     .exp-card {
     flex-direction: column;   /* 👈 stack vertically */
     gap: 1.2rem;
@@ -1022,4 +1020,3 @@ footer {
     font-size: 0.65rem;
   }
 }
-
