@@ -1,14 +1,921 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Madhan Lankalapalli | VLSI & FPGA Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════════
+   ROOT VARIABLES — CREAM PASTEL PALETTE
+═══════════════════════════════════════════════ */
+:root {
+  --bg:        #faf6f0;
+  --bg2:       #f5efe6;
+  --bg3:       #ede5d8;
+  --card:      #fefcf8;
+  --card2:     #f9f3ea;
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  --border:    rgba(160,130,100,0.14);
+  --border2:   rgba(160,130,100,0.26);
+
+  --rose:      #c4765a;
+  --rose2:     #b06248;
+  --rose-dim:  rgba(196,118,90,0.08);
+  --sage:      #7a9e87;
+  --sage2:     #618d72;
+  --gold:      #c9923a;
+  --gold2:     #b57d28;
+  --dusty:     #8e6c8a;
+  --clay:      #c4765a;
+
+  --text:      #2e2118;
+  --text2:     #6b5242;
+  --muted:     #a08878;
+  --white:     #fefcf8;
+
+  --nav-h:     68px;
+  --r:         10px;
+  --r2:        16px;
+
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   WARM PAPER TEXTURE BACKGROUND
+═══════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 15% 10%, rgba(196,118,90,0.055) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 85%, rgba(122,158,135,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(201,146,58,0.03) 0%, transparent 70%);
+}
+
+/* Subtle warm grid */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(160,130,100,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,130,100,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+#home-page, #project-page { position: relative; z-index: 1; }
+section { position: relative; z-index: 1; padding: 100px 6%; }
+.section-inner { margin: 0 auto; width: 100%; }
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════════ */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--rose);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.1rem, 3.8vw, 3rem);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.9rem;
+}
+
+.section-sub { color: var(--text2); max-width: 500px; font-size: 1rem; line-height: 1.8; }
+.section-head { margin-bottom: 3.5rem; }
+
+.divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  margin-top: 1rem;
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(250,246,240,0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--rose); }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--rose);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--rose); }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: transparent;
+  color: var(--rose);
+  text-decoration: none;
+  padding: 0.5rem 1.3rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--rose);
+  transition: all 0.2s;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.04em;
+}
+.nav-cta:hover {
+  background: var(--rose);
+  color: var(--white);
+  box-shadow: 0 4px 18px rgba(196,118,90,0.28);
+}
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: 0.3s; }
+
+.mobile-menu {
+  position: fixed; inset: 0; background: rgba(250,246,240,0.98);
+  z-index: 999; backdrop-filter: blur(30px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 600;
+  color: var(--text); text-decoration: none; transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--rose); }
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 6%;
+  font-size: 1.5rem; color: var(--muted); cursor: pointer;
+  border: none; background: none; padding: 0.5rem; transition: color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.mobile-close:hover { color: var(--text); }
+
+/* ═══════════════════════════════════════════════
+   PAGES
+═══════════════════════════════════════════════ */
+#home-page { display: block; }
+#project-page {
+  display: none; position: fixed; inset: 0;
+  background: var(--bg); z-index: 500;
+  overflow-y: auto; padding-top: var(--nav-h);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO / ABOUT
+═══════════════════════════════════════════════ */
+#about {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding-top: calc(var(--nav-h) + 60px);
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 5rem; align-items: center;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 1;
+}
+
+.about-tag {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  background: rgba(196,118,90,0.07);
+  border: 1px solid rgba(196,118,90,0.22);
+  color: var(--rose);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem; border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+.pulse-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rose);
+  animation: pulsedot 2s infinite;
+}
+@keyframes pulsedot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+
+h1.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 6.5vw, 5.2rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.2rem;
+}
+h1.hero-name .line2 {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 1.02rem; color: var(--text2);
+  line-height: 1.85; max-width: 540px; margin-bottom: 2.5rem;
+}
+.hero-desc strong { color: var(--text); font-weight: 600; }
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+
+.btn-primary {
+  background: var(--rose); color: var(--white);
+  text-decoration: none; padding: 0.82rem 2rem;
+  border-radius: var(--r); font-weight: 600; font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s; border: none; cursor: pointer;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 16px rgba(196,118,90,0.22);
+}
+.btn-primary:hover {
+  background: var(--rose2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,118,90,0.35);
+}
+
+.btn-outline {
+  background: transparent; color: var(--text);
+  text-decoration: none; padding: 0.82rem 2rem;
+  border-radius: var(--r); font-weight: 500; font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid var(--border2); transition: all 0.25s; cursor: pointer;
+}
+.btn-outline:hover {
+  border-color: var(--rose); color: var(--rose);
+  transform: translateY(-2px);
+  background: var(--rose-dim);
+}
+
+.btn-resume {
+  background: var(--card); color: var(--gold);
+  text-decoration: none; padding: 0.82rem 1.6rem;
+  border-radius: var(--r); font-weight: 600; font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  border: 1.5px solid rgba(201,146,58,0.35); transition: all 0.25s; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  box-shadow: 0 2px 10px rgba(201,146,58,0.1);
+}
+.btn-resume:hover {
+  border-color: var(--gold); color: var(--gold2);
+  transform: translateY(-2px);
+  background: rgba(201,146,58,0.07);
+  box-shadow: 0 6px 20px rgba(201,146,58,0.2);
+}
+
+.hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.hero-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 600; color: var(--text); line-height: 1;
+}
+.hero-stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; font-weight: 400; }
+
+/* About image */
+.about-img-wrap { position: relative; }
+.about-img-card {
+  display: flex; flex-direction: column;
+  border-radius: var(--r2);
+  aspect-ratio: 3/4; position: relative;
+}
+.profile-img {
+  position: relative;
+  height: 60%;
+}
+.about-img-card img { width: 100%; height: 100%; object-fit: cover; object-position: right; border-radius: 0 2rem 0 2rem; }
+.about-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(250,246,240,0.85) 100%);
+  border-radius: 0 2rem 0 2rem;
+}
+.about-img-badge {
+  margin-top: 2.5rem;
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+}
+.badge-inner {
+  background: var(--card); border-radius: var(--r); padding: 1rem 1.2rem;
+}
+.badge-title { font-weight: 600; color: var(--text); font-size: 0.88rem; }
+.badge-sub { color: var(--muted); font-size: 0.78rem; margin-top: 0.2rem; }
+
+.social-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding: 0 4rem;
+}
+
+.social-icon {
+  width: 50px; height: 50px;
+  background-color: var(--card);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: var(--r);
+  border: 1px solid var(--border2);
+  transition: all 0.2s;
+}
+.social-icon:hover { border-color: var(--rose); background: var(--rose-dim); }
+.social-icon:hover i { color: var(--rose); }
+.social-icon i { font-size: 20px; color: var(--text2); }
+
+.float-chip {
+  position: absolute;
+  background: var(--card2); border: 1px solid var(--border2); border-radius: 9px;
+  padding: 0.6rem 1rem; font-size: 0.78rem; font-weight: 600;
+  display: flex; align-items: center; gap: 0.5rem;
+  box-shadow: 0 8px 24px rgba(160,130,100,0.12);
+  animation: floatchip 4s ease-in-out infinite;
+  font-family: 'DM Mono', monospace;
+  color: var(--text2);
+}
+.float-chip.chip1 { top: 20px; right: -30px; animation-delay: 0s; }
+.float-chip.chip3 { bottom: 100px; left: -30px; animation-delay: 0.8s; }
+@keyframes floatchip { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* ═══════════════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════════════ */
+.exp-timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.exp-card {
+  display: flex; gap: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(160,130,100,0.06);
+}
+.exp-card:hover {
+  border-color: var(--rose);
+  transform: translateX(4px);
+  box-shadow: 0 6px 24px rgba(160,130,100,0.1);
+}
+.exp-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--rose), var(--gold));
+  opacity: 0; transition: opacity 0.3s;
+}
+.exp-card:hover::before { opacity: 1; }
+.exp-img-box { position: relative; border-radius: var(--r); }
+.exp-img { width: 280px; height: 100%; object-fit: cover; border-radius: var(--r); }
+
+.exp-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+.exp-role { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
+.exp-date {
+  font-size: 0.7rem; font-weight: 500;
+  padding: 0.28rem 0.85rem; border-radius: 50px;
+  background: rgba(196,118,90,0.08); border: 1px solid rgba(196,118,90,0.2);
+  color: var(--rose); font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+}
+.exp-org { color: var(--rose); font-size: 0.86rem; font-weight: 600; margin-bottom: 1rem; opacity: 0.9; }
+
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.exp-bullets li {
+  color: var(--text2); font-size: 0.9rem; line-height: 1.7;
+  padding-left: 1.4rem; position: relative;
+}
+.exp-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 0.68em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--rose);
+}
+.exp-bullets li strong { color: var(--text); font-weight: 600; }
+
+.exp-award {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+  background: rgba(201,146,58,0.08); border: 1px solid rgba(201,146,58,0.25);
+  color: var(--gold); padding: 0.4rem 0.9rem; border-radius: 8px;
+  font-size: 0.8rem; font-weight: 600; font-family: 'DM Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════ */
+.skills-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 0 auto;
+}
+
+.skill-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 1.6rem;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+  gap: 0.9rem; display: flex; flex-direction: column;
+  box-shadow: 0 2px 10px rgba(160,130,100,0.05);
+}
+.skill-card:hover {
+  border-color: var(--rose);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(160,130,100,0.12);
+}
+.skill-card::after {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, rgba(196,118,90,0.07), transparent);
+  pointer-events: none;
+}
+
+.skill-icon {
+  width: 40px; height: 40px; border-radius: 9px;
+  background: rgba(196,118,90,0.08); border: 1px solid rgba(196,118,90,0.18);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.1rem; font-size: 1.1rem; color: var(--rose);
+}
+.skill-cat { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--text); }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+.pill {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); font-size: 0.73rem; font-weight: 500;
+  font-family: 'DM Mono', monospace;
+  padding: 0.28rem 0.75rem; border-radius: 5px;
+  transition: all 0.2s; cursor: default;
+}
+.pill:hover { border-color: var(--rose); color: var(--rose); background: var(--rose-dim); }
+
+/* ═══════════════════════════════════════════════
+   EDUCATION
+═══════════════════════════════════════════════ */
+.edu-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 2.5rem;
+  display: grid; grid-template-columns: auto 1fr; gap: 2.5rem;
+  align-items: start;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px rgba(160,130,100,0.06);
+}
+.edu-card:hover { border-color: var(--rose); box-shadow: 0 6px 24px rgba(160,130,100,0.1); }
+
+.edu-logo {
+  width: 76px; height: 76px; border-radius: 14px;
+  overflow: hidden; border: 1px solid var(--border);
+  background: var(--bg3); flex-shrink: 0;
+}
+.edu-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+.edu-degree { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.25rem; color: var(--text); margin-bottom: 0.3rem; }
+.edu-uni { font-weight: 600; color: var(--rose); font-size: 0.9rem; margin-bottom: 0.25rem; }
+.edu-loc { color: var(--muted); font-size: 0.82rem; margin-bottom: 1rem; }
+.edu-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.edu-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.83rem; font-weight: 600; }
+.edu-badge.cgpa { color: var(--gold); }
+.edu-badge.year { color: var(--muted); }
+.edu-courses { font-size: 0.86rem; color: var(--text2); line-height: 1.7; }
+.edu-courses strong { color: var(--text); }
+
+/* ═══════════════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════════════ */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 0 auto;
+}
+
+.proj-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden; cursor: pointer;
+  transition: all 0.3s; display: flex; flex-direction: column;
+  box-shadow: 0 2px 12px rgba(160,130,100,0.06);
+}
+.proj-card:hover {
+  border-color: var(--rose);
+  box-shadow: 0 8px 28px rgba(160,130,100,0.12);
+  transform: translateY(-3px);
+}
+
+.proj-img { height: 250px; overflow: hidden; position: relative; background: var(--bg3); }
+.proj-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s; }
+.proj-card:hover .proj-img img { transform: scale(1.05); }
+.proj-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(254,252,248,0.94) 100%);
+}
+.proj-img-badges { position: absolute; top: 12px; left: 12px; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.badge {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 0.22rem 0.6rem; border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+}
+.badge-cyan { background: rgba(196,118,90,0.88); color: #fff; }
+.badge-blue { background: rgba(122,158,135,0.88); color: #fff; }
+.badge-gold { background: rgba(201,146,58,0.88); color: #fff; }
+
+.proj-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+.proj-title { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.97rem; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
+.proj-desc { color: var(--text2); font-size: 0.85rem; line-height: 1.7; margin-bottom: 1.1rem; flex: 1; }
+
+.proj-metrics {
+  display: flex; gap: 1.2rem;
+  padding: 0.9rem 0; border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); margin-bottom: 1rem;
+}
+.proj-metric-val { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--rose); }
+.proj-metric-label { font-size: 0.68rem; color: var(--muted); margin-top: 0.1rem; font-family: 'DM Mono', monospace; }
+
+.proj-footer { display: flex; align-items: center; justify-content: space-between; }
+.proj-view-btn {
+  font-size: 0.8rem; font-weight: 600; color: var(--rose);
+  display: flex; align-items: center; gap: 0.4rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.proj-view-btn svg { transition: transform 0.2s; }
+.proj-card:hover .proj-view-btn svg { transform: translateX(4px); }
+.proj-period { font-size: 0.72rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+/* ═══════════════════════════════════════════════
+   WORKSHOPS
+═══════════════════════════════════════════════ */
+.workshop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 0 auto;
+}
+
+.workshop-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden; transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(160,130,100,0.05);
+}
+.workshop-card:hover {
+  border-color: var(--rose);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(160,130,100,0.12);
+}
+.workshop-img { height: 250px; overflow: hidden; position: relative; background: var(--bg3); }
+.workshop-img img { width: 100%; height: 100%; object-position: top; object-fit: cover; transition: transform 0.5s; }
+.workshop-card:hover .workshop-img img { transform: scale(1.05); }
+.workshop-body { padding: 1.4rem; display: flex; flex-direction: column; }
+
+.workshop-org {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 0.5rem;
+}
+.workshop-title { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--text); font-size: 0.93rem; margin-bottom: 0.6rem; line-height: 1.3; }
+.workshop-desc { color: var(--text2); font-size: 0.83rem; line-height: 1.7; }
+
+/* ═══════════════════════════════════════════════
+   CERTIFICATIONS
+═══════════════════════════════════════════════ */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 0 auto;
+}
+
+.cert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 1.4rem;
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(160,130,100,0.05);
+}
+.cert-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 28px rgba(160,130,100,0.12);
+}
+
+.cert-details { display: flex; flex-direction: column; flex: 1; }
+
+.cert-score {
+  width: 54px; height: 54px; border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: rgba(201,146,58,0.07);
+}
+.cert-score-num { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.05rem; color: var(--gold); line-height: 1; margin-right: 2px; }
+.cert-score-pct { font-size: 0.7rem; color: var(--gold); opacity: 0.7; font-family: 'DM Mono', monospace; }
+.cert-name { font-weight: 700; color: var(--text); font-size: 0.88rem; margin-bottom: 0.28rem; line-height: 1.3; font-family: 'DM Sans', sans-serif; }
+.cert-provider { font-size: 0.77rem; color: var(--muted); margin-bottom: 0.4rem; }
+.cert-rank { font-size: 0.75rem; color: var(--sage); font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem; font-family: 'DM Mono', monospace; }
+.cert-verify { align-self: flex-end; font-size: 0.88rem; color: var(--gold); font-family: 'DM Sans', sans-serif; }
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+#contact { background: var(--bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.contact-desc { font-size: 1rem; color: var(--text2); line-height: 1.9; margin-bottom: 2rem; }
+
+.contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border); border-radius: var(--r);
+  text-decoration: none; color: var(--text);
+  background: var(--card); transition: all 0.25s;
+  box-shadow: 0 1px 6px rgba(160,130,100,0.05);
+}
+.contact-link:hover {
+  border-color: var(--rose); background: var(--rose-dim);
+  color: var(--rose); transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(196,118,90,0.12);
+}
+.contact-link-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px; padding: 4px;
+  background: rgba(196,118,90,0.08); display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--rose);
+}
+.contact-link-label { font-size: 0.67rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; font-family: 'DM Mono', monospace; }
+.contact-link-val { font-size: 0.86rem; font-weight: 500; margin-top: 0.1rem; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 2rem 6%; display: flex;
+  justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+  position: relative; z-index: 1;
+}
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--text); font-size: 1.1rem; }
+.footer-brand span { color: var(--rose); }
+.footer-copy { font-size: 0.77rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; font-family: 'DM Sans', sans-serif; }
+.footer-links a:hover { color: var(--rose); }
+
+/* ═══════════════════════════════════════════════
+   PROJECT DETAIL PAGE
+═══════════════════════════════════════════════ */
+.pd-hero {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 3rem 6% 2.5rem; position: relative; z-index: 1;
+}
+.pd-back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--text2); font-size: 0.85rem; font-weight: 500;
+  cursor: pointer; border: none; background: none; padding: 0;
+  margin-bottom: 2rem; transition: color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.pd-back:hover { color: var(--rose); }
+.pd-back i { transition: transform 0.2s; }
+.pd-back:hover i { transform: translateX(-3px); }
+
+.pd-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.pd-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--text);
+  letter-spacing: -0.02em; margin-bottom: 0.8rem; line-height: 1.15;
+}
+.pd-period { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; font-family: 'DM Mono', monospace; }
+
+.pd-box { display: flex; padding: 3rem 6%; gap: 2rem; }
+
+.pd-img-main { position: sticky; top: 100px; width: 100%; height: 440px; border-radius: var(--r2); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(160,130,100,0.1); }
+.pd-img-main img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.pd-body { max-width: 800px; }
+.pd-section-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.35rem;
+  color: var(--text); margin-bottom: 1.1rem; margin-top: 2.5rem;
+}
+.pd-section-title:first-child { margin-top: 0; }
+
+.pd-text { color: var(--text2); line-height: 1.9; font-size: 0.97rem; margin-bottom: 1rem; }
+.pd-text strong { color: var(--text); }
+
+.pd-metrics-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+.pd-metric {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 1.2rem 1.4rem;
+}
+.pd-metric-val { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.6rem; color: var(--rose); }
+.pd-metric-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; font-family: 'DM Mono', monospace; }
+
+.pd-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+.pd-bullets li { color: var(--text2); font-size: 0.95rem; line-height: 1.7; padding-left: 1.5rem; position: relative; }
+.pd-bullets li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+.pd-bullets li strong { color: var(--text); }
+
+.pd-tool-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+
+.pd-github-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--rose); color: var(--white);
+  text-decoration: none; padding: 0.85rem 2rem;
+  border-radius: var(--r); font-weight: 600; font-size: 0.9rem;
+  margin-top: 1rem; transition: all 0.25s; font-family: 'DM Sans', sans-serif;
+  box-shadow: 0 4px 16px rgba(196,118,90,0.22);
+}
+.pd-github-btn:hover {
+  background: var(--rose2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,118,90,0.35);
+}
+
+/* ─── CERT MODAL ─── */
+.cert-modal {
+  position: fixed; inset: 0;
+  display: none; align-items: center; justify-content: center; z-index: 9999;
+}
+.cert-modal.active { display: flex; }
+.cert-modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(46,33,24,0.6);
+  backdrop-filter: blur(6px);
+}
+.cert-modal-content {
+  position: relative; max-width: 900px; width: 90%;
+  background: var(--card); border-radius: var(--r2);
+  padding: 1rem; z-index: 2;
+  animation: modalFade 0.3s ease;
+  border: 1px solid var(--border2);
+  box-shadow: 0 20px 60px rgba(160,130,100,0.2);
+}
+.cert-modal-content img { width: 100%; border-radius: var(--r2); }
+.cert-close {
+  position: absolute; top: -12px; right: -12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: none; background: var(--gold); color: #fff;
+  font-weight: 700; cursor: pointer; font-size: 1rem;
+}
+@keyframes modalFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════════ */
+.reveal,
+.reveal-left,
+.reveal-right {
+  --reveal-transform: none;
+  opacity: 1;
+  transform: var(--reveal-transform);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.anim       { --reveal-transform: translateY(28px); }
+.reveal-left.anim  { --reveal-transform: translateX(-28px); }
+.reveal-right.anim { --reveal-transform: translateX(28px); }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible {
+  opacity: 1; --reveal-transform: none;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION ALTERNATING BG
+═══════════════════════════════════════════════ */
+#experience, #education, #workshops { background: var(--bg2); }
+#skills, #projects, #certifications, #contact { background: var(--bg); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 1260px) {
+  .about-grid { grid-template-columns: 1fr 380px; gap: 3.5rem; }
+  .pd-box { flex-direction: column; }
+  .pd-body { order: 1; }
+  .pd-img-main { position: relative; top: 0; }
+}
+@media (max-width: 1024px) {
+  .exp-card { flex-direction: column; }
+  .skills-layout { grid-template-columns: repeat(3, 1fr); }
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
+  .workshop-grid { grid-template-columns: repeat(2, 1fr); }
+  .cert-grid { grid-template-columns: 1fr 1fr; }
+  .exp-img { width: 220px; }
+}
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-img-wrap { width: 70%; }
+  .skills-layout { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .edu-card { grid-template-columns: 1fr; gap: 1.5rem; }
+  .edu-logo { width: 60px; height: 60px; }
+  .float-chip { display: none; }
+}
+@media (max-width: 680px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 70px 5%; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .exp-card { grid-template-columns: 1fr; gap: 1rem; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .workshop-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat-val { font-size: 2rem; }
+  .section-title { font-size: 2rem; }
+  footer { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .footer-links { gap: 1rem; }
+  h1.hero-name { font-size: clamp(2.8rem, 10vw, 3.8rem); }
+  .cert-grid { grid-template-columns: 1fr; }
+  .pd-img-main { height: 340px; }
+  .about-img-wrap { width: 100%; }
+  .social-box { padding: 0 1rem; }
+  .hero-btns { flex-wrap: wrap; }
+}
+@media (max-width: 420px) {
+  .proj-metrics { gap: 0.8rem; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-outline, .btn-resume { text-align: center; }
+  .workshop-grid { grid-template-columns: 1fr; }
+  .exp-card { flex-direction: column; gap: 1.2rem; padding: 1.5rem; }
+  .exp-img { width: 100%; height: 220px; }
+  .exp-meta { flex-direction: column; align-items: flex-start; }
+  .exp-date { font-size: 0.65rem; }
+}
+</style>
 </head>
 <body>
 
@@ -48,7 +955,6 @@
 
 <!-- HERO / ABOUT -->
 <section id="about">
-
   <div class="about-grid">
     <div class="reveal-left">
       <div class="about-tag">
@@ -65,6 +971,9 @@
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects</a>
         <a href="#contact" class="btn-outline">Get In Touch</a>
+        <a href="resume.pdf" target="_blank" class="btn-resume">
+          <i class="fa-regular fa-file-lines"></i> Resume
+        </a>
       </div>
       <div class="hero-stats">
         <div>
@@ -87,6 +996,7 @@
       <div class="about-img-card">
         <div class="profile-img">
           <img src="images/projects/profile.jpeg" alt="Madhan Lankalapalli" loading="lazy"/>
+          <div class="about-img-overlay"></div>
         </div>
         <div class="about-img-badge">
           <div class="badge-inner">
@@ -108,7 +1018,6 @@
             <i class="fa-brands fa-instagram"></i>
           </a>
         </div>
-
       </div>
     </div>
   </div>
@@ -125,7 +1034,7 @@
 
     <div class="exp-card reveal">
       <div class="exp-img-box">
-        <img class="exp-img" src="images/projects/kgp.jpg" alt="IIT KGP" />
+        <img class="exp-img" src="images/projects/kgp.jpg" alt="IIT KGP"/>
       </div>
       <div>
         <div class="exp-meta">
@@ -142,8 +1051,8 @@
 
     <div class="exp-card reveal">
       <div class="exp-img-box">
-        <img class="exp-img" src="images/projects/mec.jpeg" alt="IIT KGP" />
-      </div>      
+        <img class="exp-img" src="images/projects/mec.jpeg" alt="MEC Kochi"/>
+      </div>
       <div>
         <div class="exp-meta">
           <div class="exp-role">Research Intern – Object Detection for ADAS</div>
@@ -170,7 +1079,7 @@
   </div>
   <div class="skills-layout">
 
-     <div class="skill-card reveal">
+    <div class="skill-card reveal">
       <div class="skill-icon"><i class="fa-solid fa-microchip"></i></div>
       <div class="skill-cat">FPGA Tools & EDA</div>
       <div class="skill-pills">
@@ -178,10 +1087,10 @@
         <span class="pill">Vivado HLS</span>
         <span class="pill">Vitis AI</span>
         <span class="pill">MATLAB</span>
-        <span class="pill">MultiSim</span> 
+        <span class="pill">MultiSim</span>
         <span class="pill">LTspice</span>
       </div>
-       <div class="skill-cat">FPGA Platforms</div>
+      <div class="skill-cat">FPGA Platforms</div>
       <div class="skill-pills">
         <span class="pill">Nexys A7</span>
         <span class="pill">ZedBoard</span>
@@ -189,7 +1098,7 @@
         <span class="pill">ZCU104</span>
       </div>
     </div>
-    
+
     <div class="skill-card reveal">
       <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
       <div class="skill-cat">HDL & Programming</div>
@@ -198,7 +1107,7 @@
         <span class="pill">C++</span>
         <span class="pill">Python</span>
       </div>
-       <div class="skill-cat">Communication Protocols</div>
+      <div class="skill-cat">Communication Protocols</div>
       <div class="skill-pills">
         <span class="pill">UART</span>
         <span class="pill">I2C</span>
@@ -206,8 +1115,6 @@
         <span class="pill">AXI4-Stream</span>
       </div>
     </div>
-
-   
 
     <div class="skill-card reveal">
       <div class="skill-icon"><i class="fa-solid fa-computer"></i></div>
@@ -228,6 +1135,7 @@
         <span class="pill">Wafer Processing</span>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -239,12 +1147,9 @@
     <div class="divider"></div>
   </div>
   <div class="exp-card reveal">
-      <div class="exp-img-box">
-        <img class="exp-img"  src="https://images.shiksha.com/mediadata/images/1751439611phpUJziHe.jpeg" alt="RGUKT" />
-      </div>
-<!--    <div class="edu-logo">
-      <img src="https://images.shiksha.com/mediadata/images/1751439611phpUJziHe.jpeg" alt="RGUKT"/>
-    </div>-->
+    <div class="exp-img-box">
+      <img class="exp-img" src="https://images.shiksha.com/mediadata/images/1751439611phpUJziHe.jpeg" alt="RGUKT"/>
+    </div>
     <div>
       <div class="edu-degree">B.Tech — Electronics & Communications Engineering</div>
       <div class="edu-uni">Rajiv Gandhi University of Knowledge Technologies (RGUKT AP IIIT)</div>
@@ -263,320 +1168,310 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-inner">
-  <div class="section-head reveal">
-    <div class="section-label">05 — Work</div>
-    <h2 class="section-title">Projects</h2>
-    <p class="section-sub" style="margin-top:0.5rem">Click any project to explore the full technical details.</p>
-    <div class="divider"></div>
-  </div>
-  <div class="proj-grid">
-
-    <div class="proj-card reveal" onclick="openProject('systolic')">
-      <div class="proj-img">
-        <img src="images/projects/4×4 Sy.png" alt="Systolic Array" loading="lazy"/>
-        <div class="proj-img-overlay"></div>
-        <div class="proj-img-badges">
-          <span class="badge badge-cyan">Verilog</span>
-          <span class="badge badge-blue">Artix-7</span>
-          <span class="badge badge-gold">AXI4-Stream</span>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-title">4×4 Systolic PE Array for Convolution Operations</div>
-        <div class="proj-desc">Parameterized Output-Stationary Systolic Array for 2D convolution. Multi-precision hardware analysis across Q8.8 to Q12.12 fixed-point formats. Deployed Laplacian edge detection on 640×640 KITTI images.</div>
-        <div class="proj-metrics">
-          <div><div class="proj-metric-val">100%</div><div class="proj-metric-label">Func. Coverage</div></div>
-          <div><div class="proj-metric-val">0.119W</div><div class="proj-metric-label">Optimal Power</div></div>
-          <div><div class="proj-metric-val">Zero</div><div class="proj-metric-label">Num. Error</div></div>
-        </div>
-        <div class="proj-footer">
-          <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="proj-period">Sep–Dec 2025</div>
-        </div>
-      </div>
+    <div class="section-head reveal">
+      <div class="section-label">05 — Work</div>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub" style="margin-top:0.5rem">Click any project to explore the full technical details.</p>
+      <div class="divider"></div>
     </div>
+    <div class="proj-grid">
 
-    <div class="proj-card reveal" onclick="openProject('adas')">
-      <div class="proj-img">
-        <img src="images/projects/Firefly_GeminiFlash_I want the image for uploading this to my portfolio website _the project is _Object D 231040.png" alt="ADAS" loading="lazy"/>
-        <div class="proj-img-overlay"></div>
-        <div class="proj-img-badges">
-          <span class="badge badge-cyan">YOLOv5</span>
-          <span class="badge badge-blue">ZCU104</span>
-          <span class="badge badge-gold">Vitis AI</span>
+      <div class="proj-card reveal" onclick="openProject('systolic')">
+        <div class="proj-img">
+          <img src="images/projects/4×4 Sy.png" alt="Systolic Array" loading="lazy"/>
+          <div class="proj-img-overlay"></div>
+          <div class="proj-img-badges">
+            <span class="badge badge-cyan">Verilog</span>
+            <span class="badge badge-blue">Artix-7</span>
+            <span class="badge badge-gold">AXI4-Stream</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">4×4 Systolic PE Array for Convolution Operations</div>
+          <div class="proj-desc">Parameterized Output-Stationary Systolic Array for 2D convolution. Multi-precision hardware analysis across Q8.8 to Q12.12 fixed-point formats. Deployed Laplacian edge detection on 640×640 KITTI images.</div>
+          <div class="proj-metrics">
+            <div><div class="proj-metric-val">100%</div><div class="proj-metric-label">Func. Coverage</div></div>
+            <div><div class="proj-metric-val">0.119W</div><div class="proj-metric-label">Optimal Power</div></div>
+            <div><div class="proj-metric-val">Zero</div><div class="proj-metric-label">Num. Error</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="proj-period">Sep–Dec 2025</div>
+          </div>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="proj-title">Object Detection for ADAS on FPGA (YOLOv5s)</div>
-        <div class="proj-desc">End-to-end ADAS pipeline: trained YOLOv5s on KITTI dataset, quantized with Vitis AI achieving 80% model size reduction, deployed as an XModel on ZCU104 FPGA for real-time inference.</div>
-        <div class="proj-metrics">
-          <div><div class="proj-metric-val">90.4%</div><div class="proj-metric-label">Precision</div></div>
-          <div><div class="proj-metric-val">90.7%</div><div class="proj-metric-label">MAP</div></div>
-          <div><div class="proj-metric-val">80%</div><div class="proj-metric-label">Size Cut</div></div>
+
+      <div class="proj-card reveal" onclick="openProject('adas')">
+        <div class="proj-img">
+          <img src="images/projects/Firefly_GeminiFlash_I want the image for uploading this to my portfolio website _the project is _Object D 231040.png" alt="ADAS" loading="lazy"/>
+          <div class="proj-img-overlay"></div>
+          <div class="proj-img-badges">
+            <span class="badge badge-cyan">YOLOv5</span>
+            <span class="badge badge-blue">ZCU104</span>
+            <span class="badge badge-gold">Vitis AI</span>
+          </div>
         </div>
-        <div class="proj-footer">
-          <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="proj-period">Jun–Sep 2025</div>
+        <div class="proj-body">
+          <div class="proj-title">Object Detection for ADAS on FPGA (YOLOv5s)</div>
+          <div class="proj-desc">End-to-end ADAS pipeline: trained YOLOv5s on KITTI dataset, quantized with Vitis AI achieving 80% model size reduction, deployed as an XModel on ZCU104 FPGA for real-time inference.</div>
+          <div class="proj-metrics">
+            <div><div class="proj-metric-val">90.4%</div><div class="proj-metric-label">Precision</div></div>
+            <div><div class="proj-metric-val">90.7%</div><div class="proj-metric-label">MAP</div></div>
+            <div><div class="proj-metric-val">80%</div><div class="proj-metric-label">Size Cut</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="proj-period">Jun–Sep 2025</div>
+          </div>
         </div>
       </div>
+
+      <div class="proj-card reveal" onclick="openProject('cnn')">
+        <div class="proj-img">
+          <img src="images/projects/CNN.png" alt="CNN Verilog" loading="lazy"/>
+          <div class="proj-img-overlay"></div>
+          <div class="proj-img-badges">
+            <span class="badge badge-cyan">Verilog</span>
+            <span class="badge badge-blue">Vivado</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Pattern Detection Using CNN in Verilog</div>
+          <div class="proj-desc">4-stage pipelined CNN accelerator for 8×8 pattern detection within 128×128 grayscale images. Parallel multiplier array with hierarchical adder tree compressing 36 partial products.</div>
+          <div class="proj-metrics">
+            <div><div class="proj-metric-val">155.67</div><div class="proj-metric-label">Max MHz</div></div>
+            <div><div class="proj-metric-val">242µs</div><div class="proj-metric-label">Inference</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="proj-period">Feb–Apr 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" onclick="openProject('oct')">
+        <div class="proj-img">
+          <img src="images/projects/oct.png" alt="OCT Medical" loading="lazy"/>
+          <div class="proj-img-overlay"></div>
+          <div class="proj-img-badges">
+            <span class="badge badge-cyan">Verilog</span>
+            <span class="badge badge-blue">Artix-7</span>
+            <span class="badge badge-gold">MATLAB</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Image Enhancement on OCT Images Using FPGA</div>
+          <div class="proj-desc">Real-time retinal OCT image enhancement pipeline — negative transformation, brightness control, adaptive thresholding, and Sobel edge detection to identify retinal layer boundaries on Artix-7 FPGA.</div>
+          <div class="proj-metrics">
+            <div><div class="proj-metric-val">Artix-7</div><div class="proj-metric-label">Platform</div></div>
+            <div><div class="proj-metric-val">Sobel</div><div class="proj-metric-label">Edge Detect</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="proj-period">Nov 2024–Jan 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" onclick="openProject('fft')">
+        <div class="proj-img">
+          <img src="images/projects/fft.png" alt="FFT DSP" loading="lazy"/>
+          <div class="proj-img-overlay"></div>
+          <div class="proj-img-badges">
+            <span class="badge badge-cyan">256-pt FFT</span>
+            <span class="badge badge-blue">100 MHz</span>
+            <span class="badge badge-gold">IIT KGP</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">256-Point FFT Core for Real-Time AQI Monitoring</div>
+          <div class="proj-desc">Pipelined butterfly FFT core operating at 100 MHz for real-time air quality signal analysis. Integrated with SPI Master, circular BRAM, and RMS/variance computation for continuous monitoring.</div>
+          <div class="proj-metrics">
+            <div><div class="proj-metric-val">100MHz</div><div class="proj-metric-label">Clock Freq</div></div>
+            <div><div class="proj-metric-val">&lt;0.35%</div><div class="proj-metric-label">RMS Error</div></div>
+            <div><div class="proj-metric-val">256pt</div><div class="proj-metric-label">FFT Size</div></div>
+          </div>
+          <div class="proj-footer">
+            <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            <div class="proj-period">Jan 2026–Present</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="proj-card reveal" onclick="openProject('cnn')">
-      <div class="proj-img">
-        <img src="images/projects/CNN.png" alt="CNN Verilog" loading="lazy"/>
-        <div class="proj-img-overlay"></div>
-        <div class="proj-img-badges">
-          <span class="badge badge-cyan">Verilog</span>
-          <span class="badge badge-blue">Vivado</span>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-title">Pattern Detection Using CNN in Verilog</div>
-        <div class="proj-desc">4-stage pipelined CNN accelerator for 8×8 pattern detection within 128×128 grayscale images. Parallel multiplier array with hierarchical adder tree compressing 36 partial products.</div>
-        <div class="proj-metrics">
-          <div><div class="proj-metric-val">155.67</div><div class="proj-metric-label">Max MHz</div></div>
-          <div><div class="proj-metric-val">242µs</div><div class="proj-metric-label">Inference</div></div>
-        </div>
-        <div class="proj-footer">
-          <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="proj-period">Feb–Apr 2025</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="proj-card reveal" onclick="openProject('oct')">
-      <div class="proj-img">
-        <img src="images/projects/oct.png" alt="OCT Medical" loading="lazy"/>
-        <div class="proj-img-overlay"></div>
-        <div class="proj-img-badges">
-          <span class="badge badge-cyan">Verilog</span>
-          <span class="badge badge-blue">Artix-7</span>
-          <span class="badge badge-gold">MATLAB</span>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-title">Image Enhancement on OCT Images Using FPGA</div>
-        <div class="proj-desc">Real-time retinal OCT image enhancement pipeline — negative transformation, brightness control, adaptive thresholding, and Sobel edge detection to identify retinal layer boundaries on Artix-7 FPGA.</div>
-        <div class="proj-metrics">
-          <div><div class="proj-metric-val">Artix-7</div><div class="proj-metric-label">Platform</div></div>
-          <div><div class="proj-metric-val">Sobel</div><div class="proj-metric-label">Edge Detect</div></div>
-        </div>
-        <div class="proj-footer">
-          <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="proj-period">Nov 2024–Jan 2025</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="proj-card reveal" onclick="openProject('fft')">
-      <div class="proj-img">
-        <img src="images/projects/fft.png" alt="FFT DSP" loading="lazy"/>
-        <div class="proj-img-overlay"></div>
-        <div class="proj-img-badges">
-          <span class="badge badge-cyan">256-pt FFT</span>
-          <span class="badge badge-blue">100 MHz</span>
-          <span class="badge badge-gold">IIT KGP</span>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-title">256-Point FFT Core for Real-Time AQI Monitoring</div>
-        <div class="proj-desc">Pipelined butterfly FFT core operating at 100 MHz for real-time air quality signal analysis. Integrated with SPI Master, circular BRAM, and RMS/variance computation for continuous monitoring.</div>
-        <div class="proj-metrics">
-          <div><div class="proj-metric-val">100MHz</div><div class="proj-metric-label">Clock Freq</div></div>
-          <div><div class="proj-metric-val">&lt;0.35%</div><div class="proj-metric-label">RMS Error</div></div>
-          <div><div class="proj-metric-val">256pt</div><div class="proj-metric-label">FFT Size</div></div>
-        </div>
-        <div class="proj-footer">
-          <div class="proj-view-btn">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          <div class="proj-period">Jan 2026–Present</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
   </div>
 </section>
 
 <!-- WORKSHOPS & TRAINING -->
 <section id="workshops">
   <div class="section-inner">
-  <div class="section-head reveal">
-    <div class="section-label">06 — Learning</div>
-    <h2 class="section-title">Workshops & Training</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="workshop-grid">
-
-    <div class="workshop-card reveal" onclick="openCertModal('images/projects/CenSE.jpeg')">
-      <div class="workshop-img">
-        <img src="images/projects/cense.png" alt="IISc" loading="lazy"/>
-      </div>
-      <div class="workshop-body">
-        <div class="workshop-org">CeNSE · IISc Bangalore</div>
-        <div class="workshop-title">Summer School on Semiconductor Technology & Microfabrication</div>
-        <div class="workshop-desc">Hands-on training in wafer processing, photolithography, doping, etching, thin-film deposition, and cleanroom protocols at India's top nanoscience research center.</div>
-
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-
-      </div>
+    <div class="section-head reveal">
+      <div class="section-label">06 — Learning</div>
+      <h2 class="section-title">Workshops & Training</h2>
+      <div class="divider"></div>
     </div>
+    <div class="workshop-grid">
 
-    <div class="workshop-card reveal" onclick="openCertModal('images/projects/FPGA.jpg')">
-      <div class="workshop-img">
-        <img src="images/projects/mec2.png" alt="MEC" loading="lazy"/>
+      <div class="workshop-card reveal" onclick="openCertModal('images/projects/CenSE.jpeg')">
+        <div class="workshop-img">
+          <img src="images/projects/cense.png" alt="IISc" loading="lazy"/>
+        </div>
+        <div class="workshop-body">
+          <div class="workshop-org">CeNSE · IISc Bangalore</div>
+          <div class="workshop-title">Summer School on Semiconductor Technology & Microfabrication</div>
+          <div class="workshop-desc">Hands-on training in wafer processing, photolithography, doping, etching, thin-film deposition, and cleanroom protocols at India's top nanoscience research center.</div>
+          <div class="cert-verify" style="margin-top:0.8rem">verify <i class="fa-regular fa-image"></i></div>
+        </div>
       </div>
-      <div class="workshop-body">
-        <div class="workshop-org">C2S Program · MeitY, Govt. of India</div>
-        <div class="workshop-title">FPGA Design Trainee Program</div>
-        <div class="workshop-desc">Built a Verilog-based FPGA Digital Payment System with core UPI functionalities. Secured <strong style="color:var(--gold)">🏆 1st Place</strong> in the program design contest at Model Engineering College, Kochi.</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+
+      <div class="workshop-card reveal" onclick="openCertModal('images/projects/FPGA.jpg')">
+        <div class="workshop-img">
+          <img src="images/projects/mec2.png" alt="MEC" loading="lazy"/>
+        </div>
+        <div class="workshop-body">
+          <div class="workshop-org">C2S Program · MeitY, Govt. of India</div>
+          <div class="workshop-title">FPGA Design Trainee Program</div>
+          <div class="workshop-desc">Built a Verilog-based FPGA Digital Payment System with core UPI functionalities. Secured <strong style="color:var(--gold)">🏆 1st Place</strong> in the program design contest at Model Engineering College, Kochi.</div>
+          <div class="cert-verify" style="margin-top:0.8rem">verify <i class="fa-regular fa-image"></i></div>
+        </div>
       </div>
+
+      <div class="workshop-card reveal">
+        <div class="workshop-img">
+          <img src="images/projects/udemy.jpeg" alt="HLS" loading="lazy"/>
+        </div>
+        <div class="workshop-body">
+          <div class="workshop-org">Udemy</div>
+          <div class="workshop-title">High-Level Synthesis for FPGA</div>
+          <div class="workshop-desc">Transformed combinational and sequential circuits in C++ using Vivado HLS, generated RTL IP cores, and verified designs on FPGA hardware through hands-on implementation.</div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="workshop-card reveal">
-      <div class="workshop-img">
-        <img src="images/projects/udemy.jpeg" alt="HLS" loading="lazy"/>
-      </div>
-      <div class="workshop-body">
-        <div class="workshop-org">Udemy</div>
-        <div class="workshop-title">High-Level Synthesis for FPGA</div>
-        <div class="workshop-desc">Transformed combinational and sequential circuits in C++ using Vivado HLS, generated RTL IP cores, and verified designs on FPGA hardware through hands-on implementation.</div>
-      </div>
-    </div>
-
-  </div>
   </div>
 </section>
 
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <div class="section-inner">
-  <div class="section-head reveal">
-    <div class="section-label">07 — Credentials</div>
-    <h2 class="section-title">Certifications</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="cert-grid">
-
-    <div class="cert-card reveal" onclick="openCertModal('images/projects/Verilog.jpeg')">
-      <div class="cert-score"><div class="cert-score-num">91</div><div class="cert-score-pct">%</div></div>
-      <div class="cert-details">
-        <div class="cert-name">System Design Through Verilog</div>
-        <div class="cert-provider">NPTEL · IIT Guwahati</div>
-        <div class="cert-rank">★ Top 5% Nationwide</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-      </div>
+    <div class="section-head reveal">
+      <div class="section-label">07 — Credentials</div>
+      <h2 class="section-title">Certifications</h2>
+      <div class="divider"></div>
     </div>
+    <div class="cert-grid">
 
-    <div class="cert-card reveal" onclick="openCertModal('images/projects/RTL.jpg')">
-      <div class="cert-score"><div class="cert-score-num">88</div><div class="cert-score-pct">%</div></div>
-      <div class="cert-details">
-        <div class="cert-name">VLSI Design Flow – RTL to GDS</div>
-        <div class="cert-provider">NPTEL · IIIT Delhi</div>
-        <div class="cert-rank">★ Top 5% Nationwide</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+      <div class="cert-card reveal" onclick="openCertModal('images/projects/Verilog.jpeg')">
+        <div class="cert-score"><div class="cert-score-num">91</div><div class="cert-score-pct">%</div></div>
+        <div class="cert-details">
+          <div class="cert-name">System Design Through Verilog</div>
+          <div class="cert-provider">NPTEL · IIT Guwahati</div>
+          <div class="cert-rank">★ Top 5% Nationwide</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
       </div>
+
+      <div class="cert-card reveal" onclick="openCertModal('images/projects/RTL.jpg')">
+        <div class="cert-score"><div class="cert-score-num">88</div><div class="cert-score-pct">%</div></div>
+        <div class="cert-details">
+          <div class="cert-name">VLSI Design Flow – RTL to GDS</div>
+          <div class="cert-provider">NPTEL · IIIT Delhi</div>
+          <div class="cert-rank">★ Top 5% Nationwide</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" onclick="openCertModal('images/projects/pcb.png')">
+        <div class="cert-score"><div class="cert-score-num">85</div><div class="cert-score-pct">%</div></div>
+        <div class="cert-details">
+          <div class="cert-name">Electronic System & PCB Design</div>
+          <div class="cert-provider">NPTEL · IIT Madras</div>
+          <div class="cert-rank">★ Top 5% Nationwide</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" onclick="openCertModal('images/projects/PD.Jpeg')">
+        <div class="cert-score"><div class="cert-score-num">83</div><div class="cert-score-pct">%</div></div>
+        <div class="cert-details">
+          <div class="cert-name">VLSI Physical Design</div>
+          <div class="cert-provider">NPTEL · IIT Roorkee</div>
+          <div class="cert-rank">★ Top 5% Nationwide</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" onclick="openCertModal('images/projects/MavenSilicon.jpeg')">
+        <div class="cert-score" style="border-color:var(--gold)">
+          <div style="color:var(--gold);font-size:1.15rem">✓</div>
+        </div>
+        <div class="cert-details">
+          <div class="cert-name">Verification Methodology</div>
+          <div class="cert-provider">Maven Silicon</div>
+          <div class="cert-rank" style="color:var(--sage)">Industry Certification</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
+      <div class="cert-card reveal" style="cursor:default;">
+        <div class="cert-score" style="border-color:var(--gold)">
+          <div style="color:var(--gold);font-size:1.15rem">✓</div>
+        </div>
+        <div class="cert-details">
+          <div class="cert-name">High-Level Synthesis for FPGA</div>
+          <div class="cert-provider">Udemy · Vivado HLS</div>
+          <div class="cert-rank" style="color:var(--sage)">Completed with Projects</div>
+          <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="cert-card reveal" onclick="openCertModal('images/projects/pcb.png')">
-      <div class="cert-score"><div class="cert-score-num">85</div><div class="cert-score-pct">%</div></div>
-      <div class="cert-details">
-        <div class="cert-name">Electronic System & PCB Design</div>
-        <div class="cert-provider">NPTEL · IIT Madras</div>
-        <div class="cert-rank">★ Top 5% Nationwide</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-      </div>
-    </div>
-
-    <div class="cert-card reveal" onclick="openCertModal('images/projects/PD.Jpeg')">
-      <div class="cert-score"><div class="cert-score-num">83</div><div class="cert-score-pct">%</div></div>
-      <div class="cert-details">
-        <div class="cert-name">VLSI Physical Design</div>
-        <div class="cert-provider">NPTEL · IIT Roorkee</div>
-        <div class="cert-rank">★ Top 5% Nationwide</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-      </div>
-    </div>
-
-    <div class="cert-card reveal" onclick="openCertModal('images/projects/MavenSilicon.jpeg')">
-      <div class="cert-score" style="border-color:var(--gold)">
-        <div style="color:var(--gold);font-size:1.15rem">✓</div>
-      </div>
-      <div class="cert-details">
-        <div class="cert-name">Verification Methodology</div>
-        <div class="cert-provider">Maven Silicon</div>
-        <div class="cert-rank" style="color:var(--cyan)">Industry Certification</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-      </div>
-    </div>
-
-    <div class="cert-card reveal" style="cursor:none;">
-      <div class="cert-score" style="border-color:var(--gold)">
-        <div style="color:var(--gold);font-size:1.15rem">✓</div>
-      </div>
-      <div class="cert-details">
-        <div class="cert-name">High-Level Synthesis for FPGA</div>
-        <div class="cert-provider">Udemy · Vivado HLS</div>
-        <div class="cert-rank" style="color:var(--cyan)">Completed with Projects</div>
-        <div class="cert-verify">verify <i class="fa-regular fa-image"></i></div>
-      </div>
-    </div>
-
-  </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-  <div class="section-head reveal">
-    <div class="section-label">08 — Connect</div>
-    <h2 class="section-title">Get In Touch</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="contact-grid">
-    <div class="reveal-left">
-      <p class="contact-desc">I'm actively looking for VLSI, FPGA, and semiconductor internship/job opportunities. If you're working on exciting hardware — let's talk.</p>
-      <div class="contact-links">
-        <a href="mailto:madhanlankalapalli04@gmail.com" class="contact-link" target="_blank">
-          <div class="contact-link-icon">
-            <i class="fa-solid fa-envelope"></i>
-          </div>
-          <div><div class="contact-link-label">Email</div><div class="contact-link-val">madhanlankalapalli04@gmail.com</div></div>
-        </a>
-        <a href="tel:+919391680665" class="contact-link" target="_blank">
-          <div class="contact-link-icon">
-            <i class="fa-solid fa-phone"></i>
-          </div>
-          <div><div class="contact-link-label">Phone</div><div class="contact-link-val">+91 93916 80665</div></div>
-        </a>
-        <a class="contact-link" style="cursor:default">
-          <div class="contact-link-icon">
-            <i class="fa-solid fa-location-dot"></i>
-          </div>
-          <div><div class="contact-link-label">Location</div><div class="contact-link-val">Palakol, Andhra Pradesh, India</div></div>
-        </a>
+    <div class="section-head reveal">
+      <div class="section-label">08 — Connect</div>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <p class="contact-desc">I'm actively looking for VLSI, FPGA, and semiconductor internship/job opportunities. If you're working on exciting hardware — let's talk.</p>
+        <div class="contact-links">
+          <a href="mailto:madhanlankalapalli04@gmail.com" class="contact-link" target="_blank">
+            <div class="contact-link-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div><div class="contact-link-label">Email</div><div class="contact-link-val">madhanlankalapalli04@gmail.com</div></div>
+          </a>
+          <a href="tel:+919391680665" class="contact-link" target="_blank">
+            <div class="contact-link-icon"><i class="fa-solid fa-phone"></i></div>
+            <div><div class="contact-link-label">Phone</div><div class="contact-link-val">+91 93916 80665</div></div>
+          </a>
+          <a class="contact-link" style="cursor:default">
+            <div class="contact-link-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><div class="contact-link-label">Location</div><div class="contact-link-val">Palakol, Andhra Pradesh, India</div></div>
+          </a>
+        </div>
       </div>
-      </div>
-
-    <div class="reveal-left">
-      <div class="contact-links">
-        <a href="https://linkedin.com/in/madhanlankalapalli" target="_blank" class="contact-link" target="_blank">
-          <div class="contact-link-icon">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </div>
-          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/madhanlankalapalli</div></div>
-        </a>
-        <a href="https://github.com/MadhanLankalapalli" target="_blank" class="contact-link">
-          <div class="contact-link-icon">
-            <i class="fa-brands fa-github"></i>
-          </div>
-          <div><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/MadhanLankalapalli</div></div>
-        </a>
-
+      <div class="reveal-left">
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/madhanlankalapalli" target="_blank" class="contact-link">
+            <div class="contact-link-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/madhanlankalapalli</div></div>
+          </a>
+          <a href="https://github.com/MadhanLankalapalli" target="_blank" class="contact-link">
+            <div class="contact-link-icon"><i class="fa-brands fa-github"></i></div>
+            <div><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/MadhanLankalapalli</div></div>
+          </a>
+          <a href="resume.pdf" target="_blank" class="contact-link">
+            <div class="contact-link-icon"><i class="fa-regular fa-file-lines"></i></div>
+            <div><div class="contact-link-label">Resume</div><div class="contact-link-val">Download my full CV</div></div>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </section>
 
@@ -601,15 +1496,14 @@
 <!-- CERTIFICATE MODAL -->
 <div class="cert-modal" id="certModal">
   <div class="cert-modal-overlay" onclick="closeCertModal()"></div>
-
   <div class="cert-modal-content">
     <button class="cert-close" onclick="closeCertModal()">✕</button>
-    <img id="certModalImg" src="" alt="Certificate" />
+    <img id="certModalImg" src="" alt="Certificate"/>
   </div>
 </div>
 
 <!-- ════════════════ SCRIPTS ════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const projects = {
   systolic: {
     title: '4×4 Systolic PE Array for Convolution Operations',
@@ -731,9 +1625,9 @@ function openProject(id) {
   const detailsHtml = p.details.map(d => `<li>${d}</li>`).join('');
 
   document.getElementById('project-content').innerHTML = `
-    <div class="pd-hero circuit-bg">
+    <div class="pd-hero">
       <button class="pd-back" onclick="closeProject()">
-        <i class="fa-solid fa-chevron-left"> </i>
+        <i class="fa-solid fa-chevron-left"></i>
         Back to Portfolio
       </button>
       <div class="pd-badges">${badgesHtml}</div>
@@ -754,8 +1648,7 @@ function openProject(id) {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           View on GitHub
         </a>
-      </div> 
-
+      </div>
       <div class="pd-img-main">
         <img src="${p.image}" alt="${p.title}" loading="lazy"/>
       </div>
@@ -776,7 +1669,6 @@ function closeProject() {
 
 /* Scroll reveal */
 const revEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-// Add anim class first so elements start hidden for scroll reveal
 revEls.forEach(el => el.classList.add('anim'));
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
@@ -794,13 +1686,12 @@ const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
- navLinks.forEach(a => {
+  navLinks.forEach(a => {
     const href = a.getAttribute('href').slice(1);
     a.classList.toggle('active', href === cur);
   });
 });
 
-/* ── HAMBURGER ── */
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
@@ -812,16 +1703,6 @@ function openCertModal(imgSrc) {
 
 function closeCertModal() {
   document.getElementById('certModal').classList.remove('active');
-}
-
-/* ── FORM SUBMIT ── */
-function handleSubmit(btn) {
-  btn.textContent = 'Message Sent ✓';
-  btn.style.background = '#22c55e';
-  setTimeout(() => {
-    btn.textContent = 'Send Message →';
-    btn.style.background = '';
-  }, 3000);
 }
 </script>
 </body>
