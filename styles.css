@@ -505,6 +505,7 @@ h1.hero-name .line2 {
   border-radius: var(--r2); padding: 1.6rem;
   transition: border-color 0.3s, transform 0.3s;
   position: relative; overflow: hidden;
+   gap: 0.9rem;
 }
 .skill-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
 .skill-card::after {
@@ -1020,3 +1021,4 @@ footer {
     font-size: 0.65rem;
   }
 }
+
