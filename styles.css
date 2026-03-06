@@ -505,7 +505,7 @@ h1.hero-name .line2 {
   border-radius: var(--r2); padding: 1.6rem;
   transition: border-color 0.3s, transform 0.3s;
   position: relative; overflow: hidden;
-   gap: 0.9rem;
+   gap: 0.9rem; display: flex; flex-direction: column;
 }
 .skill-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
 .skill-card::after {
@@ -522,7 +522,7 @@ h1.hero-name .line2 {
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 1.1rem; font-size: 1.2rem;
 }
-.skill-cat { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--white); margin-bottom: 0.9rem; }
+.skill-cat { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--white); }
 .skill-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
 .pill {
@@ -1021,4 +1021,5 @@ footer {
     font-size: 0.65rem;
   }
 }
+
 
