@@ -437,6 +437,7 @@ h1.hero-name .line2 {
 
 .exp-card {
     display: flex;
+    align-items: flex-start; 
     gap: 2rem;
   background: var(--card);
   border: 1px solid var(--border);
