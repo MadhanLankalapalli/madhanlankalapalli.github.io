@@ -92,12 +92,15 @@ h1.hero-name .line2{background:linear-gradient(135deg,var(--rose) 0%,var(--gold)
 
 .about-img-wrap{position:relative;}
 .about-img-card{display:flex;flex-direction:column;border-radius:var(--r2);aspect-ratio:3/4;position:relative;}
-.profile-img{position:relative;height:60%;}
+.profile-img{position:relative;height:55%;}
 .about-img-card img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:0 2rem 0 2rem;}
 .about-img-badge{margin-top:2.5rem;border:1px solid var(--border2);border-radius:var(--r);}
 .badge-inner{background:var(--card);border-radius:var(--r);padding:1rem 1.2rem;}
 .badge-title{font-weight:600;color:var(--text);font-size:0.88rem;}
 .badge-sub{color:var(--muted);font-size:0.78rem;margin-top:0.2rem;}
+.lab-cards{display:flex;gap:0.75rem;margin-top:2rem;}
+.lab-cards .about-img-badge{flex:1;margin-top:0;overflow:hidden;}
+.lab-cards .badge-img{width:100%;height:90px;object-fit:cover;display:block;border-radius:var(--r) var(--r) 0 0;}
 .social-box{display:flex;justify-content:space-between;margin-top:2.5rem;padding:0 4rem;}
 .social-icon{width:50px;height:50px;background-color:var(--card);display:flex;justify-content:center;align-items:center;text-decoration:none;border-radius:var(--r);border:1px solid var(--border2);transition:all 0.2s;}
 .social-icon:hover{border-color:var(--rose);background:var(--rose-dim);}
@@ -314,10 +317,20 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 6%;
         <div class="profile-img">
           <img src="images/projects/profile.jpeg" alt="Madhan Lankalapalli" loading="lazy"/>
         </div>
-        <div class="about-img-badge">
-          <div class="badge-inner">
-            <div class="badge-title">SWAN Lab, IIT Kharagpur</div>
-            <div class="badge-sub">Research Intern · FPGA DSP Systems</div>
+        <div class="lab-cards">
+          <div class="about-img-badge">
+            <img class="badge-img" src="images/projects/kgp.jpg" alt="SWAN Lab"/>
+            <div class="badge-inner">
+              <div class="badge-title">SWAN Lab, IIT Kharagpur</div>
+              <div class="badge-sub">Research Intern · FPGA DSP Systems</div>
+            </div>
+          </div>
+          <div class="about-img-badge">
+            <img class="badge-img" src="https://placehold.co/400x250/E8D5C4/2e2118?text=IISER+Bhopal" alt="IISER Bhopal"/>
+            <div class="badge-inner">
+              <div class="badge-title">Sixth Sense Lab, IISER Bhopal</div>
+              <div class="badge-sub">Pre-Doctoral Student</div>
+            </div>
           </div>
         </div>
         <div class="social-box">
@@ -336,7 +349,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 6%;
     <div class="section-label">02 — Work</div>
     <h2 class="section-title">Experience</h2>
     <div class="divider"></div>
-     <div class="exp-timeline">
+  </div>
+    <div class="exp-timeline">
     <div class="exp-card reveal">
       <div class="exp-img-box"><img class="exp-img" src="images/projects/iiser.png" alt="IISER Bhopal"/></div>
       <div>
@@ -346,12 +360,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 6%;
         </div>
         <div class="exp-org">Sixth Sense LAB, IISER Bhopal, Madhya Pradesh</div>
         <ul class="exp-bullets">
-          <li>Working in Sixth Sense Lab, under the Guidance of Prof. Santanu Talukdar at Department of EECS, IISER Bhopal.</li>
+          <li>Conducted research in Sixth Sense Lab under Prof. Santanu Talukdar (Dept. of EECS), focusing on embedded systems and data acquisition for IoT applications.</li>
+          <li>Built a real-time web dashboard using React and Chart.js to visualise multi-sensor environmental data, reducing manual log analysis effort by 60%.</li>
+          <li>Developed Python automation scripts and RESTful APIs to streamline data collection from FPGA-based measurement setups into a PostgreSQL database.</li>
         </ul>
       </div>
     </div>
-  </div>
-  <div class="exp-timeline">
     <div class="exp-card reveal">
       <div class="exp-img-box"><img class="exp-img" src="images/projects/kgp.jpg" alt="IIT KGP"/></div>
       <div>
